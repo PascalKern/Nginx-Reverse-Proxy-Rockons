@@ -1,0 +1,76 @@
+{
+  "Webmin Bind (EO)": {
+    "containers": {
+      "eo-webmin-dns": {
+        "image": "sameersbn/bind:9.9.5-20170626",
+        "tag": "latest",
+        "launch_order": 1,
+        "ports": {
+          "53": {
+            "description": "The port used for exposing DNS service",
+            "host_default": 53,
+            "label": "DNS Port",
+            "ui": false
+          },
+          "10000": {
+            "description": "The port used for Webmin",
+            "host_default": 10000,
+            "label": "Webmin Port",
+            "protocol": "tcp",
+            "ui": true
+          }
+        },
+        "volumes": {
+          "/data": {
+            "description": "Choose a share for your bind9 zone files.",
+            "label": "Bind9 Storage"
+          }
+        },
+        "environment": {
+          "VIRTUAL_HOST": {
+            "description": "Specify the virtual host name to add to the nginx proxy. ",
+            "label": "Virtual Host",
+            "index": 1
+          },
+          "LETSENCRYPT_HOST": {
+            "description": "Specify the virtual host name for letsencrypt - likely the same as the virtual host.",
+            "label": "Letsencrypt Host",
+            "index": 2
+          },
+          "VIRTUAL_PORT": {
+            "description": "Should be the same as the exposed port used by Webmin to configure the virtual hosts entries in the Nginx proxy Rockon, if it's running. ",
+            "label": "Letsencrypt Host",
+            "index": 3
+          },
+          "LETSENCRYPT_EMAIL": {
+            "description": "Specify an email for letsencrypt.",
+            "label": "Letsencrypt Email",
+            "index": 4
+          },
+          "LETSENCRYPT_TEST": {
+            "description": "Specify using letsencrypt test or production certificate generation.",
+            "label": "Letsencrypt test(true/false)",
+            "index": 5
+          },
+          "ROOT_PASSWORD": {
+            "description": "Enter a root password.",
+            "label": "Webmin Password",
+            "index": 6
+          }
+        },
+        "opts": [
+          ["--net", "rockon_br0"],
+          ["-h", "eo-webmin-dns"]
+        ]
+      }
+    },
+    "description": "A Bind DNS service managed with Webmin. ",
+    "more_info": "This can be configured as a DNS cashe and local resolver. Or you can host your own DNS server for your sites. ",
+    "ui": {
+      "https": true,
+      "slug": ""
+    },
+    "version": "0.1",
+    "website": "https://github.com/sameersbn/docker-bind"
+  }
+}

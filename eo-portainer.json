@@ -1,0 +1,62 @@
+{
+  "Portainer (EO)": {
+    "containers": {
+      "eo-portainer": {
+        "image": "portainer/portainer",
+        "tag": "latest",
+        "launch_order": 1,
+        "ports": {
+          "9000": {
+            "description": "The standard HTTP port the proxy server will listen to for requests.",
+            "host_default": 9000,
+            "label": "Web UI",
+            "protocol": "tcp",
+            "ui": true
+          }
+        },
+        "environment": {
+          "VIRTUAL_HOST": {
+            "description": "Specify the virtual host name to add to the nginx proxy.",
+            "label": "Virtual Host",
+            "index": 1
+          },
+          "LETSENCRYPT_HOST": {
+            "description": "Specify the virtual host name for letsencrypt - likely the same as the virtual host.",
+            "label": "Letsencrypt Host",
+            "index": 2
+          },
+          "LETSENCRYPT_EMAIL": {
+            "description": "Specify an email for letsencrypt.",
+            "label": "Letsencrypt Email",
+            "index": 3
+          },
+          "LETSENCRYPT_TEST": {
+            "description": "Specify using letsencrypt test or production certificate generation.",
+            "label": "Letsencrypt test(true/false)",
+            "index": 4
+          }
+        },
+        "volumes": {
+          "/data": {
+            "description": "Choose a share for Portainer data.",
+            "label": "Data storage",
+            "min_size": 1073741824,
+            "index": 1
+          }
+        },
+        "opts": [
+          ["--net", "rockon_br0"],
+          ["-v", "/var/run/docker.sock:/var/run/docker.sock:ro"],
+          ["-h", "eo-portainer"]
+        ]
+      }
+    },
+    "description": "This Enigma Omega Rockon installs Portainer, a Docker container managment UI. ",
+    "more_info": "The Portainer UI is an extensively featured UI. The features of Portainer are handy to use in conjunction with the Rockon UI. ",
+    "version": "0.1",
+    "ui": {
+      "slug": ""
+    },
+    "website": "https://portainer.io/"
+  }
+}

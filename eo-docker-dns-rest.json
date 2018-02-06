@@ -1,0 +1,29 @@
+{
+  "docker-dns-rest (EO)": {
+    "containers": {
+      "eo-docker-dns-rest": {
+        "image": "phensley/docker-dns-rest",
+        "tag": "latest",
+        "launch_order": 1,
+        "ports": {
+          "80": {
+            "description": "The port used for the rest API DNS managment",
+            "host_default": 2053,
+            "label": "Rest API",
+            "protocol": "tcp",
+            "ui": false
+          }
+        },
+        "opts": [
+          ["--net", "rockon_br0"],
+          ["-h", "eo-docker-dns-rest"],
+          ["-v", "/var/run/docker.sock:/docker.sock"]
+        ]
+      }
+    },
+    "description": "Container DNS rest API",
+    "more_info": "",
+    "version": "0.1",
+    "website": "https://github.com/phensley/docker-dns-rest"
+  }
+}
